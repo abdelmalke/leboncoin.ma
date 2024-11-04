@@ -1,0 +1,214 @@
++---------------------------------------+
+|                User                   |
++---------------------------------------+
+| id                                     |
+| name                                   |
+| email                                  |
+| password                               |
+| role                                   |
+| payment_status                         |
+| token                                  |
++---------------------------------------+
+| + register()                           |
+| + login()                              |
+| + logout()                             |
+| + createUser()                         |
+| + authenticate(apiRoute, formData)     |
+| + getUser()                            |
++---------------------------------------+
+
+                1            *
+                |            |
+                |            |
++---------------------------------------+
+|               Post                    |
++---------------------------------------+
+| id                                     |
+| title                                  |
+| description                            |
+| price                                  |
+| location                               |
+| category_id                            |
+| user_id                                |
+| status                                 |
++---------------------------------------+
+| + createPost(formData)                 |
+| + editPost(post, formData)             |
+| + deletePost(post)                     |
+| + getAllPosts()                        |
+| + getPost(postId)                      |
++---------------------------------------+
+
+                *            1
+                |            |
+                |            |
++---------------------------------------+
+|             Appointment               |
++---------------------------------------+
+| id                                     |
+| user_id                                |
+| post_id                                |
+| appointment_date                       |
+| status                                 |
++---------------------------------------+
+| + scheduleAppointment(formData)        |
+| + acceptAppointment(appointmentId)     |
+| + rejectAppointment(appointmentId)     |
+| + fetchAppointments()                  |
+| + fetchAppointment(appointmentId)      |
++---------------------------------------+
+
+                1            1
+                |            |
+                |            |
++---------------------------------------+
+|              Payment                  |
++---------------------------------------+
+| id                                     |
+| user_id                                |
+| amount                                 |
+| status                                 |
+| payment_date                           |
++---------------------------------------+
+| + initiatePayment()                    |
+| + confirmPayment()                     |
++---------------------------------------+
+
+                ^ Inherits
+                |
+                |
++---------------------------------------+
+|           Administrator               |
++---------------------------------------+
+| Inherits: User                         |
++---------------------------------------+
+| + manageUsers()                        |
+| + managePosts()                        |
+| + manageAppointments()                 |
++---------------------------------------+
+Use Case Diagram
+Actors:
++---------------------------+                +------------------------+
+|       Administrator       |                |          Editor        |
++---------------------------+                +------------------------+
+| - Manages users           |                | - Creates posts        |
+| - Manages posts           |                | - Edits posts          |
+| - Manages appointments    |                | - Manages appointments |
+| - Handles payments        |                +------------------------+
++---------------------------+
+                |                          +------------------------+
+                |                          |          User          |
+                |                          +------------------------+
+                |                          | - Views listings       |
+                |                          | - Schedules appointments|
+                |                          | - Makes payments       |
+                |                          +------------------------+
+                |
++--------------------------- System ---------------------------+
+|                                                             |
+|  +------------------+   +-----------------+   +-----------+  |
+|  | Register/Login   |   | Browse Listings |   | Manage    |  |
+|  +------------------+   +-----------------+   | Appointments | |
+|                                    ^   ^      +-----------+  |
+|                                   / \ / \                   |
+|  +------------------+  +----------------------+             |
+|  | Create Posts     |  | Edit/Delete Posts    |             |
+|  +------------------+  +----------------------+             |
+|                                                             |
++-------------------------------------------------------------+
+
+
+
+ Sequence Diagram
+
+
++---------+       +-------------+       +-------------+       +-------------+
+|  User   |       | Appointment |       |    Post     |       |   Database   |
++---------+       +-------------+       +-------------+       +-------------+
+     |                   |                    |                      |
+     |--(Search Posts)-->|                    |                      |
+     |                   |<--Get Available----|                      |
+     |                   |  Posts             |                      |
+     |<------------------|                    |                      |
+     |                   |                    |                      |
+     |--(Schedule Appt)--|                    |                      |
+     |                   |--Check Availability|                      |
+     |                   |                    |<--Confirm Available--|
+     |                   |                    |                      |
+     |                   |--Store Appt--------|                      |
+     |                   |                    |                      |
+     |<--Confirm Appt----|                    |                      |
+     |                   |                    |                      |
+
+
+
+Sequence 2: Managing Posts
+
++---------+       +---------+       +-----------+       +-------------+
+|  Editor |       |  Post   |       |   System  |       |   Database  |
++---------+       +---------+       +-----------+       +-------------+
+     |                 |                  |                       |
+     |--(Create Post)--|                  |                       |
+     |                 |--Validate--------|                       |
+     |                 |                  |--Save Post------------|
+     |                 |                  |                       |
+     |<----------------|                  |                       |
+     |                 |                  |                       |
+     |--(Edit/Delete)--|                  |                       |
+     |                 |--Update/Remove---|                       |
+     |                 |                  |--Update/Delete--------|
+     |<----------------|                  |                       |
+     |                 |                  |                       |
+
+
+
+Deployment Diagram
+
+
++--------------------------------------------+
+|               Web Server (Vue.js)          |
++--------------------------------------------+
+| - User interface components                |
+| - Handles routing with Vue Router          |
+| - Manages state with Pinia                 |
+| - Sends requests to API endpoints          |
+| - Uses cookies for token management        |
++--------------------------------------------+
+
+                 |
+                 |
+                 v
+
++--------------------------------------------+
+|            Application Server (Laravel)    |
++--------------------------------------------+
+| - RESTful API handling (users, posts,      |
+|   appointments, payments)                  |
+| - Business logic for scheduling, managing  |
+|   posts, and payments                      |
+| - Authorization and authentication         |
++--------------------------------------------+
+
+                 |
+                 |
+                 v
+
++--------------------------------------------+
+|              Database Server (MySQL)       |
++--------------------------------------------+
+| - Stores relational data for Users, Posts, |
+|   Appointments, Payments                   |
+| - Handles relationships (1:Many, 1:1)      |
++--------------------------------------------+
+
+                 |
+                 |
+                 v
+
++--------------------------------------------+
+|       Payment Gateway (Stripe API)         |
++--------------------------------------------+
+| - Manages payment transactions             |
+| - Provides secure payment processing       |
++--------------------------------------------+
+

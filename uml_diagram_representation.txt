@@ -1,0 +1,73 @@
+
+# UML Diagram Text Representation
+
+---
+
+## 1. Class Diagram:
+### Entities:
+- **User**:
+  - Attributes: id, name, email, password, role, payment_status
+  - Methods: register(), login(), upgradeToEditor()
+  
+- **Post**:
+  - Attributes: id, title, description, price, location, category, status
+  - Methods: createPost(), editPost(), deletePost()
+  
+- **Appointment**:
+  - Attributes: id, user_id, post_id, appointment_date, status
+  - Methods: scheduleAppointment(), cancelAppointment()
+  
+- **Payment**:
+  - Attributes: id, user_id, amount, status, payment_date
+  - Methods: initiatePayment(), confirmPayment()
+  
+- **Administrator** (inherits from User):
+  - Additional Methods: manageUsers(), managePosts()
+
+### Relationships:
+- **User** → **Post** (1:Many): A user (Editor) can create many posts.
+- **User** → **Appointment** (1:Many): A user can schedule many appointments.
+- **Post** → **Appointment** (1:Many): A post can have many appointments scheduled.
+- **User** → **Payment** (1:1): A user can make a payment to become an editor.
+
+---
+
+## 2. Use Case Diagram:
+### Actors:
+- **Administrator**: Manages users, posts, payments.
+- **Editor**: Creates, edits, deletes posts and manages appointments.
+- **User**: Views listings, schedules appointments, makes payments to upgrade to Editor.
+
+### Use Cases:
+1. **Register/Login**: All users (User, Editor, Administrator) register and log in.
+2. **Browse Listings**: Users can search for land listings based on location, price, and category.
+3. **Create/Edit/Delete Posts**: Editors create and manage posts for land listings.
+4. **Manage Appointments**: Editors schedule and manage appointments with users.
+5. **Upgrade to Editor**: Users pay to upgrade to Editor.
+6. **Manage Users & Listings**: Administrators manage user roles, posts, and payments.
+
+---
+
+## 3. Sequence Diagram:
+### Sequence 1: Scheduling an Appointment
+- **User** searches and selects a post.
+- **User** initiates scheduling.
+- **System** checks post availability.
+- **User** confirms the appointment.
+- **System** records the appointment.
+
+### Sequence 2: Upgrading to Editor via Payment
+- **User** initiates upgrade to Editor.
+- **System** directs the user to the payment gateway (Stripe).
+- **Payment Gateway** processes the payment.
+- **System** updates the user’s role to Editor.
+- **Editor** can now create posts.
+
+---
+
+## 4. Deployment Diagram (Optional):
+### Components:
+- **Web Server**: Hosts the front-end (Vue.js).
+- **Application Server**: Hosts the Laravel back-end.
+- **Database Server**: Hosts MySQL database.
+- **Payment Gateway**: Stripe API integrated for payment processing.

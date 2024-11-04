@@ -1,0 +1,65 @@
+ Cahier des Charges pour l'Application de Vente de Terrains Résidentiels et Agricoles
+
+
+
+ 1. *Introduction*
+L'objectif de ce projet est de concevoir et de développer une application web pour la vente de terrains résidentiels et agricoles. Cette plateforme permettra aux utilisateurs de rechercher, de visualiser, et d'acheter des terrains selon leurs besoins. Elle inclura des fonctionnalités de gestion pour les vendeurs et les administrateurs afin de gérer les annonces, les utilisateurs, et les transactions.
+
+ 2. *Objectifs du Projet*
+- *Plateforme de mise en relation:* Offrir une plateforme intuitive pour les acheteurs et les vendeurs de terrains.
+- *Gestion des annonces:* Permettre aux utilisateurs de créer, modifier, et supprimer des annonces de terrains.
+- *Sécurité:* Garantir la sécurité des transactions et des informations personnelles via l'authentification.
+- *Responsivité:* Assurer une expérience utilisateur optimale sur tous les types de dispositifs (desktop, tablette, mobile).
+
+ 3. *Fonctionnalités Principales*
+
+ 3.1. *Fonctionnalités Utilisateurs*
+- *Inscription et Authentification:* Système d'inscription et de connexion sécurisé pour les utilisateurs (acheteurs et vendeurs).
+- *Recherche de Terrains:* Fonctionnalité de recherche avec filtres (localisation, prix, surface, type de terrain).
+- *Visualisation des Annonces:* Affichage détaillé des annonces avec photos, description, localisation sur carte, et contact du vendeur.
+- *Gestion des Annonces:* Création, modification, et suppression des annonces pour les vendeurs.
+- *Favoris:* Possibilité pour les acheteurs de sauvegarder des annonces en favoris.
+
+ 3.2. *Fonctionnalités Administratives*
+- *Gestion des Utilisateurs:* Interface pour l'administration des utilisateurs (activation, désactivation, suppression).
+- *Gestion des Annonces:* Modération des annonces (approbation, rejet).
+- *Gestion des Transactions:* Suivi des transactions et gestion des paiements.
+
+ 4. *Technologies Utilisées*
+- *Back-end:* Laravel (PHP)
+- *Front-end:* Vue.js
+- *Base de données:* MySQL
+- *ORM:* Eloquent
+- *Gestion des états globaux:* Vuex
+- *Sécurité:* Laravel Sanctum ou Laravel Breeze pour l'authentification
+- *Conteneurisation:* Docker
+- *Documentation des API:* Swagger
+- *Outils de conception:* Figma ou Adobe XD
+
+ 5. *Conception Logicielle*
+- *Diagrammes UML:* Création de diagrammes de cas d'utilisation, diagrammes de classes, et diagrammes de séquences.
+- *Architecture MVC:* Application d'une architecture MVC pour structurer le code.
+
+6. *Maquettage*
+- *Interface Utilisateur:* Création des maquettes pour les interfaces desktop et mobile.
+- *Charte Graphique:* Développement d'une charte graphique avec une identité visuelle cohérente.
+
+ 7. *Tests et Sécurité*
+- *Tests Unitaires:* Rédaction de tests unitaires pour valider les fonctionnalités back-end.
+- *Middleware:* Implémentation de middlewares pour la gestion des erreurs et la sécurité.
+- *Protéger les Routes:* Sécurisation des routes critiques de l'application.
+
+ 8. *Déploiement*
+- *Docker:* Génération des images Docker pour le back-end et le front-end.
+- *Hébergement:* Déploiement sur une plateforme cloud (ex: Heroku).
+- *Base de Données:* Configuration et sécurisation de la base de données avec une stratégie de sauvegarde.
+- *Scalabilité:* Mise en place de mécanismes pour gérer une augmentation du trafic.
+
+ 9. *Livrables*
+- *Cahier de Charges:* Cahier de Charges.docx et Cahier de Charges.pdf
+- *Conception UML:* Diagrammes UML.pdf
+- *Maquettes:* Maquette Desktop.pdf, Maquette Mobile.pdf
+- *Rapport:* Rapport.docx et Rapport.pdf
+- *Présentation:* Présentation.pptx et Présentation.pdf
+- *Code Source:* Lien vers le dépôt GitHub
+- *Projet Hébergé:* Lien vers le site en ligne
